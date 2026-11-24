@@ -16,9 +16,9 @@
 .hero > .media, .campaign > .media { @include shared.cover-layer; z-index: -1; background-color: transparent; }
 .hero::after, .campaign::after { content: ""; @include shared.cover-layer; z-index: -1; pointer-events: none; }
 .hero::after { background: linear-gradient(rgb(0 0 0 / 65%), transparent 25%); }
-.hero h1 { font: 400 clamp(90px, 14vw, 225px)/.85 Georgia, serif; }
-.hero h1 small { display: block; margin-top: 20px; font: 500 clamp(14px, 2vw, 25px)/1.2 system-ui; letter-spacing: .38em; }
-.hero-link { position: absolute; inset: auto 0 clamp(34px, 2.8vw, 54px); display: grid; place-items: center; width: 80px; height: 80px; margin-inline: auto; border: 1px solid rgb(255 255 255 / 50%); border-radius: 50%; text-decoration: none; font-size: 24px; }
+.hero h1 { font: 400 14.0625rem/.85 Georgia, serif; }
+.hero h1 small { display: block; margin-top: 20px; font: 500 1.5625rem/1.2 system-ui; letter-spacing: .38em; }
+.hero-link { position: absolute; inset: auto 0 clamp(34px, 2.8vw, 54px); display: grid; place-items: center; width: 80px; height: 80px; margin-inline: auto; border: 1px solid rgb(255 255 255 / 50%); border-radius: 50%; text-decoration: none; font-size: 1.5rem; }
 .category { padding-bottom: clamp(52px, 4.32vw, 83px); position: relative; margin-top: -24px; border-radius: 24px 24px 0 0; background: white; }
 .category-grid {
   --collapsed-column: 7fr;
@@ -97,7 +97,7 @@
 .perfume-card .media { align-self: start; aspect-ratio: 232 / 366; background: transparent; }
 .perfume-card img, .best-card img { object-fit: contain; }
 .perfume-card > div { padding: 0 12px clamp(24px, 3.28vw, 63px) 0; }
-.perfume-card h3 { font-size: clamp(13px, 1.2vw, 18px); overflow-wrap: anywhere; }
+.perfume-card h3 { font-size: 1.125rem; overflow-wrap: anywhere; }
 .perfume-card p { font-size: shared.$caption-size; color: var(--muted); }
 .intensity { display: block; margin-top: 14px; font-size: .75rem; }
 .intensity::after { display: block; content: ""; margin-top: 5px; width: min(100%, 110px); height: 5px; border-radius: 6px; background: linear-gradient(90deg, #ac815d 80%, #eee7e1 80%); }
@@ -113,7 +113,7 @@
   border-radius: 50%;
   color: var(--ink);
   background: white;
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 .rail-controls button:disabled { opacity: .5; cursor: default; }
 .campaign { position: relative; isolation: isolate; display: flex; align-items: center; min-height: clamp(350px, 45.833vw, 880px); padding: 50px var(--gutter); color: white; background: #322117 linear-gradient(120deg, #251a14, #6b412d); }
@@ -143,7 +143,7 @@
 .best-card .media { display: grid; place-items: center; aspect-ratio: 1.08; background: transparent; }
 .best-card .media img { width: 63%; height: auto; }
 #best-libre .media img { width: 83%; }
-.best-card h3 { margin-top: 12px; font-size: clamp(16px, 1.04vw, 20px); }
+.best-card h3 { margin-top: 12px; font-size: 1.25rem; }
 .best-card p { color: var(--muted); }
 .services { padding-block: clamp(48px, 3.96vw, 76px); background: #f6f6f6; }
 .services .section-title { margin-bottom: 14px; }
@@ -154,7 +154,7 @@
 .service-panels:not(.swiper-wrapper) .service-card + .service-card { margin-top: 16px; }
 .service-card .media { aspect-ratio: 690 / 466; border-radius: 8px; }
 .service-copy { padding: 8px; }
-.service-copy p:first-child { margin-bottom: clamp(24px, 3.8vw, 73px); color: var(--accent); font-size: clamp(21px, 2.4vw, 36px); font-weight: 600; }
+.service-copy p:first-child { margin-bottom: clamp(24px, 3.8vw, 73px); color: var(--accent); font-size: 2.25rem; font-weight: 600; }
 .service-copy p:last-child { margin-top: 8px; color: var(--muted); }
 .lookbook { padding-block: clamp(56px, 4.95vw, 95px) clamp(48px, 4.48vw, 86px); }
 .look-rail { --slide-width: clamp(245px, 27.24vw, 523px); padding-inline: var(--rail-gap); }

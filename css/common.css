@@ -6,6 +6,7 @@
 }
 :root {
   color-scheme: light;
+  font-size: 16px;
   --ink: #1d1d1d;
   --muted: #5e5e5e;
   --accent: #8a4963;
@@ -31,6 +32,10 @@ html {
 
 body, h1, h2, h3, p, figure, ul {
   margin: 0;
+}
+
+body {
+  font-size: 1rem;
 }
 
 ul {
@@ -98,7 +103,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-vis
 }
 
 h2 {
-  font-size: clamp(24px, 2.35vw, 36px);
+  font-size: 2.25rem;
   font-weight: 500;
   letter-spacing: -0.025em;
 }
@@ -155,7 +160,7 @@ h2 {
 }
 
 .wordmark {
-  font: 700 23px Georgia, serif;
+  font: 700 1.4375rem Georgia, serif;
   text-decoration: none;
 }
 
@@ -173,7 +178,7 @@ h2 {
 }
 
 .main-nav a {
-  font-size: 16px;
+  font-size: 1rem;
   text-decoration: none;
 }
 
@@ -231,7 +236,7 @@ h2 {
 
 .footer-groups h2 {
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .footer-groups ul {
@@ -252,7 +257,7 @@ h2 {
 }
 
 .footer-brand {
-  font: italic clamp(18px, 2vw, 30px) Georgia, serif;
+  font: italic 1.875rem Georgia, serif;
 }
 
 .footer-social, .footer-meta, .footer-meta ul {
@@ -322,6 +327,7 @@ h2 {
 @media (max-width: 1050px) {
   :root {
     --header-height: 64px;
+    font-size: 14px;
   }
   .js .main-nav {
     position: absolute;
@@ -362,6 +368,9 @@ h2 {
   }
 }
 @media (max-width: 540px) {
+  :root {
+    font-size: 12px;
+  }
   .header-inner {
     gap: 8px;
   }
@@ -369,7 +378,7 @@ h2 {
     gap: 0;
   }
   .locale {
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -8,6 +8,7 @@
 }
 :root {
   color-scheme: light;
+  font-size: shared.$desktop-base-font-size;
   --ink: #1d1d1d;
   --muted: #5e5e5e;
   --accent: #8a4963;
@@ -25,6 +26,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-padding-top: calc(var(--header-height) + 18px); }
 body, h1, h2, h3, p, figure, ul { margin: 0; }
+body { font-size: 1rem; }
 ul { padding: 0; list-style: none; }
 button, input { font: inherit; }
 button { cursor: pointer; }
@@ -55,7 +57,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, [tabindex]:focus-vis
 .wrap { @include shared.content-width(var(--wrap)); }
 .section { padding-block: clamp(56px, 6.25vw, 120px); }
 .section-title { margin: 0 var(--gutter) clamp(26px, 2.58vw, 50px); text-align: center; }
-h2 { font-size: clamp(24px, 2.35vw, 36px); font-weight: 500; letter-spacing: -.025em; }
+h2 { font-size: 2.25rem; font-weight: 500; letter-spacing: -.025em; }
 .section-title p { margin-top: 4px; color: var(--muted); }
 .media { display: block; overflow: hidden; background-color: var(--cream); }
 .media img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -78,7 +80,7 @@ h2 { font-size: clamp(24px, 2.35vw, 36px); font-weight: 500; letter-spacing: -.0
 }
 .wordmark img, .footer-brand img, .footer-social img { display: block; max-width: 100%; }
 .over-hero .wordmark img, .site-header:not(.over-hero) .header-tools img { filter: invert(1); }
-.wordmark { font: 700 23px Georgia, serif; text-decoration: none; }
+.wordmark { font: 700 1.4375rem Georgia, serif; text-decoration: none; }
 .main-nav { display: flex; gap: clamp(10px, 2.4vw, 48px); }
 .main-nav a, .header-tools :is(a, button), .menu-toggle {
   display: inline-flex;
@@ -87,7 +89,7 @@ h2 { font-size: clamp(24px, 2.35vw, 36px); font-weight: 500; letter-spacing: -.0
   min-height: shared.$control-size;
   padding-inline: 6px;
 }
-.main-nav a { font-size: 16px; text-decoration: none; }
+.main-nav a { font-size: 1rem; text-decoration: none; }
 .main-nav a:hover { text-decoration: underline; }
 .header-tools { display: flex; align-items: center; gap: clamp(0px, .6vw, 12px); margin-inline-start: auto; }
 .header-tools :is(a, button) { min-width: 36px; border: 0; color: inherit; background: transparent; }
@@ -108,12 +110,12 @@ h2 { font-size: clamp(24px, 2.35vw, 36px); font-weight: 500; letter-spacing: -.0
   gap: clamp(20px, 5.2vw, 100px);
   margin-bottom: clamp(42px, 5.73vw, 110px);
 }
-.footer-groups h2 { margin-bottom: 20px; font-size: 20px; }
+.footer-groups h2 { margin-bottom: 20px; font-size: 1.25rem; }
 .footer-groups ul { line-height: 2; }
 .footer-groups a, .footer-meta a { text-decoration: none; }
 .footer-groups a:hover, .footer-meta a:hover { text-decoration: underline; }
 .footer-identity { justify-self: end; text-align: right; }
-.footer-brand { font: italic clamp(18px, 2vw, 30px) Georgia, serif; }
+.footer-brand { font: italic 1.875rem Georgia, serif; }
 .footer-social, .footer-meta, .footer-meta ul { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 .footer-social { justify-content: end; margin-top: 20px; }
 .footer-details { color: rgb(255 255 255 / 65%); }
@@ -126,7 +128,7 @@ h2 { font-size: clamp(24px, 2.35vw, 36px); font-weight: 500; letter-spacing: -.0
 #search-status { margin-block: 12px 0; }
 #search-results a { display: flex; min-height: shared.$control-size; align-items: center; }
 @include shared.below(shared.$menu-breakpoint) {
-  :root { --header-height: 64px; }
+  :root { --header-height: 64px; font-size: shared.$tablet-base-font-size; }
   .js .main-nav {
     position: absolute;
     inset: 100% calc(-1 * var(--gutter)) auto;
@@ -147,9 +149,10 @@ h2 { font-size: clamp(24px, 2.35vw, 36px); font-weight: 500; letter-spacing: -.0
   html:not(.js) .main-nav { order: 3; width: 100%; gap: 0 10px; }
 }
 @include shared.below(shared.$phone-breakpoint) {
+  :root { font-size: shared.$mobile-base-font-size; }
   .header-inner { gap: 8px; }
   .header-tools { gap: 0; }
-  .locale { font-size: 13px; }
+  .locale { font-size: .8125rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
