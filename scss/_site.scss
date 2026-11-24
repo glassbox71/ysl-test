@@ -79,7 +79,11 @@ h2 { font-size: 2.25rem; font-weight: 500; letter-spacing: -.025em; }
   @include shared.content-width(shared.$wide-content);
 }
 .wordmark img, .footer-brand img, .footer-social img { display: block; max-width: 100%; }
-.over-hero .wordmark img, .site-header:not(.over-hero) .header-tools img { filter: invert(1); }
+.over-hero :is(.wordmark, .menu-toggle) img,
+.site-header:has(.menu-toggle[aria-expanded="true"]) :is(.wordmark, .menu-toggle) img,
+.site-header:not(.over-hero, :has(.menu-toggle[aria-expanded="true"])) .header-tools img {
+  filter: invert(1);
+}
 .wordmark { font: 700 1.4375rem Georgia, serif; text-decoration: none; }
 .main-nav { display: flex; gap: clamp(10px, 2.4vw, 48px); }
 .main-nav a, .header-tools :is(a, button), .menu-toggle {
@@ -96,12 +100,13 @@ h2 { font-size: 2.25rem; font-weight: 500; letter-spacing: -.025em; }
 .header-tools img { display: block; }
 .locale { margin-inline-end: clamp(6px, 1.2vw, 24px); }
 .menu-toggle {
+  min-width: shared.$control-size;
+  padding: 0;
+  border: 0;
   background: transparent;
-  color: inherit;
-  border: 1px solid currentColor;
-  border-radius: shared.$pill-radius;
-  padding-inline: 14px;
 }
+.menu-toggle[aria-expanded="false"] .menu-icon-close,
+.menu-toggle[aria-expanded="true"] .menu-icon-open { display: none; }
 .site-footer { padding: clamp(40px, 4.32vw, 83px) var(--gutter); color: white; background: black; }
 .footer-inner { max-width: shared.$wide-content; margin-inline: auto; }
 .footer-groups {
@@ -133,13 +138,18 @@ h2 { font-size: 2.25rem; font-weight: 500; letter-spacing: -.025em; }
     position: absolute;
     inset: 100% calc(-1 * var(--gutter)) auto;
     display: none;
+    gap: 0;
     background: shared.$menu-background;
     color: white;
     padding: 8px var(--gutter) 16px;
     max-height: calc(100dvh - var(--header-height));
     overflow: auto;
   }
-  .js .main-nav.is-open { display: grid; }
+  .js .main-nav.is-open {
+    display: grid;
+    animation: menu-open 200ms ease-out both;
+  }
+  .js .main-nav a + a { border-top: 1px solid rgb(255 255 255 / 14%); }
   .main-nav { flex-wrap: wrap; }
   .main-nav a { justify-content: flex-start; }
   .footer-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -154,6 +164,11 @@ h2 { font-size: 2.25rem; font-weight: 500; letter-spacing: -.025em; }
   .header-tools { gap: 0; }
   .locale { font-size: .8125rem; }
 }
+@keyframes menu-open {
+  from { opacity: 0; transform: translateY(-.375rem); }
+  to { opacity: 1; transform: translateY(0); }
+}
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; }
+  .js .main-nav.is-open { animation: none; }
 }
