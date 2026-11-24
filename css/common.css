@@ -13,6 +13,7 @@
   --cream: #f5f1ed;
   --gutter: clamp(16px, 7.8125vw, 150px);
   --rail-gap: clamp(12px, 1.5625vw, 30px);
+  --edge-gutter: max(16px, var(--rail-gap));
   --radius: 12px;
   --wrap: 1420px;
   --header-height: 70px;
@@ -146,8 +147,7 @@ h2 {
   align-items: center;
   gap: clamp(12px, 2.1vw, 40px);
   min-height: var(--header-height);
-  width: min(1620px, 100% - var(--gutter) * 2);
-  margin-inline: auto;
+  margin-inline: var(--edge-gutter);
 }
 
 .wordmark img, .footer-brand img, .footer-social img {
@@ -164,6 +164,12 @@ h2 {
 .wordmark {
   font: 700 1.4375rem Georgia, serif;
   text-decoration: none;
+}
+
+.header-menu {
+  display: flex;
+  flex: 1;
+  align-items: center;
 }
 
 .main-nav {
@@ -212,6 +218,7 @@ h2 {
 
 .menu-toggle {
   min-width: 44px;
+  margin-inline-start: auto;
   padding: 0;
   border: 0;
   background: transparent;
@@ -223,14 +230,9 @@ h2 {
 }
 
 .site-footer {
-  padding: clamp(40px, 4.32vw, 83px) var(--gutter);
+  padding: clamp(40px, 4.32vw, 83px) var(--edge-gutter);
   color: white;
   background: black;
-}
-
-.footer-inner {
-  max-width: 1620px;
-  margin-inline: auto;
 }
 
 .footer-groups {
@@ -335,20 +337,29 @@ h2 {
     --header-height: 64px;
     font-size: 14px;
   }
-  .js .main-nav {
+  .js :is(.header-menu, .header-inner > .main-nav) {
     position: absolute;
-    inset: 100% calc(-1 * var(--gutter)) auto;
+    inset: 100% calc(-1 * var(--edge-gutter)) auto;
     display: none;
     gap: 0;
     background: #1d1713;
     color: white;
-    padding: 8px var(--gutter) 16px;
+    padding: 8px var(--edge-gutter) 16px;
     max-height: calc(100dvh - var(--header-height));
     overflow: auto;
   }
-  .js .main-nav.is-open {
+  .js :is(.header-menu, .main-nav).is-open {
     display: grid;
     animation: menu-open 200ms ease-out both;
+  }
+  .js .header-menu .main-nav {
+    display: grid;
+    gap: 0;
+  }
+  .js .header-menu .header-tools {
+    margin: 0.75rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
   }
   .js .main-nav a + a {
     border-top: 1px solid rgba(255, 255, 255, 0.14);
@@ -372,6 +383,10 @@ h2 {
   html:not(.js) .header-inner {
     flex-wrap: wrap;
   }
+  html:not(.js) .header-menu {
+    flex: 0 0 100%;
+    flex-wrap: wrap;
+  }
   html:not(.js) .main-nav {
     order: 3;
     width: 100%;
@@ -381,6 +396,8 @@ h2 {
 @media (max-width: 540px) {
   :root {
     font-size: 12px;
+    --gutter: clamp(16px, 5vw, 24px);
+    --edge-gutter: var(--gutter);
   }
   .header-inner {
     gap: 8px;
@@ -406,7 +423,7 @@ h2 {
   *, *::before, *::after {
     scroll-behavior: auto !important;
   }
-  .js .main-nav.is-open {
+  .js :is(.header-menu, .main-nav).is-open {
     animation: none;
   }
 }

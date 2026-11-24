@@ -8,22 +8,23 @@
     const nav = document.querySelector('#main-nav');
     const menu = document.querySelector('.menu-toggle');
     if (!header || !nav || !menu) return;
+    const panel = document.getElementById(menu.getAttribute('aria-controls')) || nav;
     const mobile = window.matchMedia('(max-width: 1050px)');
 
     function closeMenu(restoreFocus = false) {
-      nav.classList.remove('is-open');
+      panel.classList.remove('is-open');
       menu.setAttribute('aria-expanded', 'false');
       if (restoreFocus) menu.focus();
     }
 
     function updateMenu() {
-      const moveFocus = mobile.matches && nav.contains(document.activeElement);
+      const moveFocus = mobile.matches && panel.contains(document.activeElement);
       menu.hidden = !mobile.matches;
       closeMenu(moveFocus);
     }
 
     menu.addEventListener('click', () => {
-      const open = nav.classList.toggle('is-open');
+      const open = panel.classList.toggle('is-open');
       menu.setAttribute('aria-expanded', String(open));
       if (open) nav.querySelector('a')?.focus();
     });
@@ -38,7 +39,7 @@
       target.focus({ preventScroll: true });
     });
     header.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && nav.classList.contains('is-open')) closeMenu(true);
+      if (event.key === 'Escape' && panel.classList.contains('is-open')) closeMenu(true);
     });
     header.addEventListener('focusout', event => {
       if (event.relatedTarget && !header.contains(event.relatedTarget)) closeMenu();
@@ -89,6 +90,14 @@
     searchButton.addEventListener('click', () => {
       updateResults();
       search.showModal();
+    });
+    search.addEventListener('close', () => {
+      requestAnimationFrame(() => {
+        const active = document.activeElement;
+        if ((active === document.body || active === searchButton || search.contains(active)) && !searchButton.getClientRects().length) {
+          searchButton.closest('.site-header')?.querySelector('.menu-toggle')?.focus();
+        }
+      });
     });
     query.addEventListener('input', updateResults);
     results.addEventListener('click', event => {

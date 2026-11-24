@@ -204,7 +204,7 @@
 }
 
 .lookbook .rail-viewport {
-  margin-inline: var(--rail-gap);
+  margin-inline: var(--edge-gutter);
 }
 
 .rail .swiper-slide {
@@ -476,7 +476,7 @@
 
 .look-rail {
   --slide-width: clamp(245px, 27.24vw, 523px);
-  padding-inline: var(--rail-gap);
+  padding-inline: var(--edge-gutter);
 }
 
 .look-rail .media {
@@ -513,6 +513,12 @@
   }
 }
 @media (max-width: 540px) {
+  .category-carousel {
+    padding-inline: 0;
+  }
+  .category-carousel :focus-visible {
+    outline-offset: -3px;
+  }
   .category-grid {
     display: block;
   }
