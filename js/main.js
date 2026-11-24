@@ -254,3 +254,24 @@ if (assetNames.has('hero.mp4')) {
   hero.querySelector('.media').append(video);
   toggle.hidden = false;
 }
+
+if (window.gsap && window.ScrollTrigger) {
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.matchMedia().add('(prefers-reduced-motion: no-preference)', () => {
+    for (const section of document.querySelectorAll('main > section:not(.hero)')) {
+      gsap.from(Array.from(section.children).filter(child => !child.classList.contains('media')), {
+        opacity: 0,
+        y: 18,
+        duration: 0.6,
+        ease: 'power2.out',
+        stagger: 0.08,
+        clearProps: 'opacity,transform',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 88%',
+          once: true,
+        },
+      });
+    }
+  });
+}
