@@ -49,20 +49,22 @@
         <h2 id="category-title" lang="en">CATEGORY</h2>
         <p>대담한 색, 잊지 못할 향, 그리고 깊이 있는 케어로 매 순간 당신의 아름다움을 완성하세요.</p>
       </div>
-      <ul class="category-grid wrap">
-        <li id="makeup">
-          <button type="button" class="category-trigger" aria-expanded="false" aria-controls="makeup-panel" hidden><span class="media" aria-hidden="true"><img src="assets/category-makeup.jpg" alt="" loading="lazy" decoding="async"></span><span class="category-name">메이크업</span></button>
-          <div class="category-panel" id="makeup-panel"><a href="#best-items">메이크업 보기</a></div>
-        </li>
-        <li id="perfume">
-          <button type="button" class="category-trigger" aria-expanded="false" aria-controls="perfume-panel" hidden><span class="media" aria-hidden="true"><img src="assets/category-fragrance.jpg" alt="" loading="lazy" decoding="async"></span><span class="category-name">향수</span></button>
-          <div class="category-panel" id="perfume-panel"><a href="#fragrance">향수 보기</a></div>
-        </li>
-        <li id="skincare">
-          <button type="button" class="category-trigger" aria-expanded="false" aria-controls="skincare-panel" hidden><span class="media" aria-hidden="true"><img src="assets/category-skincare.jpg" alt="" loading="lazy" decoding="async"></span><span class="category-name">스킨케어</span></button>
-          <div class="category-panel" id="skincare-panel"><a href="#best-serum">스킨케어 보기</a></div>
-        </li>
-      </ul>
+      <div class="category-carousel swiper wrap">
+        <ul class="category-grid swiper-wrapper">
+          <li class="swiper-slide" id="makeup">
+            <button type="button" class="category-trigger" aria-expanded="false" aria-controls="makeup-panel" hidden><span class="media" aria-hidden="true"><img src="assets/category-makeup.jpg" alt="" loading="lazy" decoding="async"></span><span class="category-name">메이크업</span></button>
+            <div class="category-panel" id="makeup-panel"><a href="#best-items">메이크업 보기</a></div>
+          </li>
+          <li class="swiper-slide" id="perfume">
+            <button type="button" class="category-trigger" aria-expanded="false" aria-controls="perfume-panel" hidden><span class="media" aria-hidden="true"><img src="assets/category-fragrance.jpg" alt="" loading="lazy" decoding="async"></span><span class="category-name">향수</span></button>
+            <div class="category-panel" id="perfume-panel"><a href="#fragrance">향수 보기</a></div>
+          </li>
+          <li class="swiper-slide" id="skincare">
+            <button type="button" class="category-trigger" aria-expanded="false" aria-controls="skincare-panel" hidden><span class="media" aria-hidden="true"><img src="assets/category-skincare.jpg" alt="" loading="lazy" decoding="async"></span><span class="category-name">스킨케어</span></button>
+            <div class="category-panel" id="skincare-panel"><a href="#best-serum">스킨케어 보기</a></div>
+          </li>
+        </ul>
+      </div>
     </section>
 
     <section class="collection section" id="fragrance" aria-labelledby="collection-title" data-carousel>

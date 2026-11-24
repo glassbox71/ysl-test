@@ -63,6 +63,7 @@ if (window.Swiper) {
   const carousels = document.querySelectorAll('[data-carousel]');
   for (const section of carousels) {
     const rail = section.querySelector('.rail');
+    const autoAdvance = section.id === 'best-items';
     const controls = section.querySelector('[data-controls]');
     const [prevEl, nextEl] = controls.querySelectorAll('button');
     const viewport = document.createElement('div');
@@ -77,7 +78,7 @@ if (window.Swiper) {
     for (const slide of rail.children) slide.classList.add('swiper-slide');
 
     function gap() {
-      return rail.classList.contains('best-rail') ? 0 : Math.max(12, Math.min(innerWidth / 64, 30));
+      return autoAdvance ? 0 : Math.max(12, Math.min(innerWidth / 64, 30));
     }
 
     new Swiper(viewport, {
@@ -86,6 +87,13 @@ if (window.Swiper) {
       speed: slideSpeed(),
       grabCursor: true,
       watchSlidesProgress: true,
+      rewind: autoAdvance,
+      autoplay: autoAdvance && {
+        enabled: !reducedMotion.matches,
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
       navigation: { prevEl, nextEl },
       a11y: { enabled: false },
       on: {
@@ -114,7 +122,8 @@ function revealBanner(hash = location.hash) {
 window.addEventListener('hashchange', () => revealBanner());
 revealBanner();
 
-const category = document.querySelector('.category-grid');
+const categoryViewport = document.querySelector('.category-carousel');
+const category = categoryViewport.querySelector('.category-grid');
 const categoryButtons = Array.from(category.querySelectorAll('.category-trigger'));
 
 function expandCategory(selected) {
@@ -128,13 +137,33 @@ function expandCategory(selected) {
 for (const button of categoryButtons) button.hidden = false;
 category.classList.add('is-accordion');
 expandCategory(categoryButtons[0]);
+
+const categorySwiper = window.Swiper ? new Swiper(categoryViewport, {
+  // Swiper selects the item while CSS animates the accordion dimensions.
+  virtualTranslate: true,
+  followFinger: false,
+  speed: 0,
+  rewind: true,
+  touchStartPreventDefault: false,
+  grabCursor: true,
+  a11y: { enabled: false },
+  on: {
+    slideChange(swiper) { expandCategory(categoryButtons[swiper.activeIndex]); },
+  },
+}) : null;
+
+function selectCategory(button) {
+  if (categorySwiper) categorySwiper.slideTo(categoryButtons.indexOf(button), 0);
+  else expandCategory(button);
+}
+
 category.addEventListener('click', event => {
   const button = event.target.closest('.category-trigger');
-  if (button) expandCategory(button);
+  if (button) selectCategory(button);
 });
 function syncCategory() {
   const item = document.getElementById(location.hash.slice(1));
-  if (item?.parentElement === category) expandCategory(item.querySelector('.category-trigger'));
+  if (item?.parentElement === category) selectCategory(item.querySelector('.category-trigger'));
 }
 window.addEventListener('hashchange', syncCategory);
 syncCategory();
@@ -182,8 +211,13 @@ if (window.Swiper) {
 }
 
 reducedMotion.addEventListener('change', () => {
-  for (const slider of document.querySelectorAll('.swiper-initialized')) {
-    slider.swiper.params.speed = slideSpeed();
+  for (const slider of document.querySelectorAll('.rail-viewport.swiper-initialized, .service-slider.swiper-initialized')) {
+    const swiper = slider.swiper;
+    swiper.params.speed = slideSpeed();
+    if (slider.closest('#best-items')) {
+      if (reducedMotion.matches) swiper.autoplay.stop();
+      else swiper.autoplay.start();
+    }
   }
 });
 
