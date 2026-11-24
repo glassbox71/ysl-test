@@ -87,10 +87,11 @@ if (window.Swiper) {
       speed: slideSpeed(),
       grabCursor: true,
       watchSlidesProgress: true,
-      rewind: autoAdvance,
+      loop: autoAdvance,
       autoplay: autoAdvance && {
         enabled: !reducedMotion.matches,
         delay: 3000,
+        waitForTransition: false,
         disableOnInteraction: false,
         pauseOnMouseEnter: true,
       },
@@ -116,7 +117,9 @@ function revealBanner(hash = location.hash) {
   if (!slide?.classList.contains('swiper-slide')) return;
   const swiper = slide.closest('.swiper').swiper;
   const index = swiper.slides.indexOf(slide);
-  if (index >= 0 && !slide.classList.contains('swiper-slide-visible')) swiper.slideTo(index, 0);
+  if (index < 0 || slide.classList.contains('swiper-slide-visible')) return;
+  if (swiper.params.loop) swiper.slideToLoop(Number(slide.dataset.swiperSlideIndex), 0);
+  else swiper.slideTo(index, 0);
 }
 
 window.addEventListener('hashchange', () => revealBanner());
