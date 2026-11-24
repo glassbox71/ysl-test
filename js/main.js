@@ -3,18 +3,6 @@
 document.documentElement.classList.add('js');
 
 const assetNames = new Set(window.yslAssets ?? []);
-for (const slot of document.querySelectorAll('[data-image]')) {
-  const filename = slot.dataset.image;
-  if (!assetNames.has(filename)) continue;
-
-  const image = document.createElement('img');
-  image.alt = '';
-  image.decoding = 'async';
-  image.loading = filename === 'hero-poster.png' ? 'eager' : 'lazy';
-  image.src = 'assets/' + encodeURIComponent(filename);
-  image.addEventListener('error', () => image.remove(), { once: true });
-  slot.append(image);
-}
 
 const header = document.querySelector('.site-header');
 const hero = document.querySelector('.hero');
@@ -27,7 +15,7 @@ updateHeader();
 
 const nav = document.querySelector('#main-nav');
 const menu = document.querySelector('.menu-toggle');
-const mobile = window.matchMedia('(max-width: 840px)');
+const mobile = window.matchMedia('(max-width: 1050px)');
 
 function closeMenu(restoreFocus = false) {
   nav.classList.remove('is-open');
@@ -182,9 +170,9 @@ if (typeof search.showModal === 'function') {
   });
 }
 
-if (assetNames.has('hero-logo.svg')) {
+const brandText = document.querySelector('.hero-brand-text');
+if (brandText && assetNames.has('hero-logo.svg')) {
   const logo = document.createElement('img');
-  const brandText = document.querySelector('.hero-brand-text');
   logo.className = 'hero-logo';
   logo.alt = '';
   logo.addEventListener('load', () => {
