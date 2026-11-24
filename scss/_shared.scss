@@ -1,0 +1,24 @@
+$menu-breakpoint: 1050px;
+$phone-breakpoint: 540px;
+$wide-content: 1620px;
+$control-size: 44px;
+$pill-radius: 30px;
+$menu-background: #1d1713;
+$accordion-duration: 380ms;
+$caption-size: .875rem;
+
+@mixin content-width($max-width) {
+  width: min($max-width, calc(100% - var(--gutter) * 2));
+  margin-inline: auto;
+}
+
+@mixin cover-layer {
+  position: absolute;
+  inset: 0;
+}
+
+@mixin below($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}
