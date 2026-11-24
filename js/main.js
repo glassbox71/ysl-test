@@ -1,7 +1,5 @@
 'use strict';
 
-document.documentElement.classList.add('js');
-
 const assetNames = new Set(window.yslAssets ?? []);
 
 const header = document.querySelector('.site-header');
@@ -12,47 +10,6 @@ function updateHeader() {
 window.addEventListener('scroll', updateHeader, { passive: true });
 window.addEventListener('resize', updateHeader);
 updateHeader();
-
-const nav = document.querySelector('#main-nav');
-const menu = document.querySelector('.menu-toggle');
-const mobile = window.matchMedia('(max-width: 1050px)');
-
-function closeMenu(restoreFocus = false) {
-  nav.classList.remove('is-open');
-  menu.setAttribute('aria-expanded', 'false');
-  if (restoreFocus) menu.focus();
-}
-
-function updateMenu() {
-  const moveFocus = mobile.matches && nav.contains(document.activeElement);
-  menu.hidden = !mobile.matches;
-  closeMenu(moveFocus);
-}
-
-menu.addEventListener('click', () => {
-  const open = nav.classList.toggle('is-open');
-  menu.setAttribute('aria-expanded', String(open));
-  if (open) nav.querySelector('a').focus();
-});
-nav.addEventListener('click', event => {
-  const link = event.target.closest('a');
-  if (!link || !mobile.matches) return;
-  closeMenu();
-  const target = document.querySelector(link.hash);
-  target.tabIndex = -1;
-  target.focus({ preventScroll: true });
-});
-header.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && nav.classList.contains('is-open')) closeMenu(true);
-});
-header.addEventListener('focusout', event => {
-  if (event.relatedTarget && !header.contains(event.relatedTarget)) closeMenu();
-});
-document.addEventListener('click', event => {
-  if (!header.contains(event.target)) closeMenu();
-});
-mobile.addEventListener('change', updateMenu);
-updateMenu();
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 function slideSpeed() {
@@ -123,6 +80,7 @@ function revealBanner(hash = location.hash) {
 }
 
 window.addEventListener('hashchange', () => revealBanner());
+document.addEventListener('site:search-select', event => revealBanner(event.detail));
 revealBanner();
 
 const categoryViewport = document.querySelector('.category-carousel');
@@ -249,55 +207,6 @@ tablist.addEventListener('keydown', event => {
 });
 selectTab(tabs[0]);
 tablist.hidden = false;
-
-const search = document.querySelector('#site-search');
-const searchButton = document.querySelector('[data-search-open]');
-const query = document.querySelector('#search-query');
-const status = document.querySelector('#search-status');
-const results = document.querySelector('#search-results');
-const searchTargets = Array.from(document.querySelectorAll('main section[id], .best-card[id]'), target => ({
-  id: target.id,
-  title: target.querySelector('h2, h3').textContent,
-  text: target.textContent.toLocaleLowerCase('ko'),
-}));
-
-function updateResults() {
-  const keyword = query.value.trim().toLocaleLowerCase('ko');
-  results.replaceChildren();
-  if (!keyword) {
-    status.textContent = '상품명 또는 콘텐츠 이름을 입력하세요.';
-    return;
-  }
-
-  const matches = searchTargets.filter(target => target.text.includes(keyword));
-  status.textContent = matches.length ? '검색 결과 ' + matches.length + '건' : '검색 결과가 없습니다.';
-  for (const target of matches) {
-    const item = document.createElement('li');
-    const link = document.createElement('a');
-    link.href = '#' + target.id;
-    link.textContent = target.title;
-    item.append(link);
-    results.append(item);
-  }
-}
-
-if (typeof search.showModal === 'function') {
-  searchButton.hidden = false;
-  searchButton.addEventListener('click', () => {
-    updateResults();
-    search.showModal();
-  });
-  query.addEventListener('input', updateResults);
-  results.addEventListener('click', event => {
-    const link = event.target.closest('a');
-    if (!link) return;
-    search.close();
-    revealBanner(link.hash);
-    const target = document.querySelector(link.hash);
-    target.tabIndex = -1;
-    target.focus({ preventScroll: true });
-  });
-}
 
 const brandText = document.querySelector('.hero-brand-text');
 if (brandText && assetNames.has('hero-logo.svg')) {

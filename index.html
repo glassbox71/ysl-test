@@ -5,10 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="입생로랑 뷰티 리뉴얼 프로젝트의 상품 컬렉션과 룩북">
   <title>입생로랑 뷰티 | 리뉴얼 프로젝트</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="vendor/swiper/swiper-bundle.min.css">
+  <link rel="stylesheet" href="css/common.css">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/assets.js" defer></script>
   <script src="vendor/swiper/swiper-bundle.min.js" defer></script>
+  <script src="js/common.js" defer></script>
   <script src="js/main.js" defer></script>
 </head>
 <body id="top">
@@ -44,7 +47,7 @@
       <button type="button" class="hero-video-toggle" hidden>영상 재생</button>
     </section>
 
-    <section class="category section" id="category" aria-labelledby="category-title">
+    <section class="category section" id="category" data-search-target aria-labelledby="category-title">
       <div class="section-title">
         <h2 id="category-title" lang="en">CATEGORY</h2>
         <p>대담한 색, 잊지 못할 향, 그리고 깊이 있는 케어로 매 순간 당신의 아름다움을 완성하세요.</p>
@@ -67,7 +70,7 @@
       </div>
     </section>
 
-    <section class="collection section" id="fragrance" aria-labelledby="collection-title" data-carousel>
+    <section class="collection section" id="fragrance" data-search-target aria-labelledby="collection-title" data-carousel>
       <div class="collection-inner">
         <div class="collection-copy">
           <h2 id="collection-title">리브르 컬렉션</h2>
@@ -120,25 +123,25 @@
       </div>
     </section>
 
-    <section class="section best" id="best-items" aria-labelledby="best-title" data-carousel>
+    <section class="section best" id="best-items" data-search-target aria-labelledby="best-title" data-carousel>
       <div class="section-title">
         <h2 id="best-title" lang="en">Best Items</h2>
         <p>시간이 증명한 품격, 가장 많은 사랑을 받은 아이콘을 만나보세요.</p>
       </div>
       <ul class="rail best-rail wrap" id="best-rail" aria-label="베스트 상품 목록" tabindex="0">
-        <li class="best-card" id="best-cushion">
+        <li class="best-card" id="best-cushion" data-search-target>
           <span class="media" aria-hidden="true"><img src="assets/best-cushion.png" alt="" loading="lazy" decoding="async"></span><h3>엉크르 드 뽀 쿠션</h3>
         </li>
-        <li class="best-card" id="best-libre">
+        <li class="best-card" id="best-libre" data-search-target>
           <span class="media" aria-hidden="true"><img src="assets/best-libre.png" alt="" loading="lazy" decoding="async"></span><h3>리브르 오 드 빠르펭</h3><p>210,000원</p>
         </li>
-        <li class="best-card" id="best-serum">
+        <li class="best-card" id="best-serum" data-search-target>
           <span class="media" aria-hidden="true"><img src="assets/best-serum.png" alt="" loading="lazy" decoding="async"></span><h3>리부트 세럼</h3>
         </li>
-        <li class="best-card" id="best-lipstick">
+        <li class="best-card" id="best-lipstick" data-search-target>
           <span class="media" aria-hidden="true"><img src="assets/best-lipstick.png" alt="" loading="lazy" decoding="async"></span><h3>루쥬 쀠르 꾸뛰르</h3>
         </li>
-        <li class="best-card" id="best-glaze">
+        <li class="best-card" id="best-glaze" data-search-target>
           <span class="media" aria-hidden="true"><img src="assets/best-glaze.png" alt="" loading="lazy" decoding="async"></span><h3>캔디 글레이즈</h3>
         </li>
       </ul>
@@ -148,7 +151,7 @@
           </div>
     </section>
 
-    <section class="section services" id="services" aria-labelledby="services-title">
+    <section class="section services" id="services" data-search-target aria-labelledby="services-title">
       <div class="section-title"><h2 id="services-title" lang="en">EXCLUSIVE SERVICES</h2></div>
       <div class="wrap">
         <div class="service-tabs" id="service-tabs" hidden>
@@ -175,7 +178,7 @@
       </div>
     </section>
 
-    <section class="section lookbook" id="lookbook" aria-labelledby="lookbook-title" data-carousel>
+    <section class="section lookbook" id="lookbook" data-search-target aria-labelledby="lookbook-title" data-carousel>
       <div class="section-title">
         <h2 id="lookbook-title" lang="en">Look Book</h2>
         <p>YSL이 담아낸 순간과 스타일, 당신의 영감이 되는 페이지.</p>

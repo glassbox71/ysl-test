@@ -5,6 +5,7 @@ $control-size: 44px;
 $pill-radius: 30px;
 $menu-background: #1d1713;
 $accordion-duration: 380ms;
+$accordion-easing: cubic-bezier(.25, .8, .25, 1);
 $caption-size: .875rem;
 
 @mixin content-width($max-width) {
